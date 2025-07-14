@@ -1,0 +1,157 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  12
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      functions;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+inletFlux
+{
+    type            surfaceFieldValue;
+    libs            ("libfieldFunctionObjects.so");
+    writeControl   timeStep;
+    log             true;
+    // Output field values as well
+    writeFields     false;
+    select          patch;
+    patch           inlet;
+    operation       sum;
+
+    fields
+    (
+        phi
+		alpha.water
+		U
+    );
+
+    weightField     alpha.water;
+}
+
+Aliviadero
+{
+    type            surfaceFieldValue;
+    libs            ("libfieldFunctionObjects.so");
+    writeControl   timeStep;
+    log             true;
+    // Output field values as well
+    writeFields     false;
+    select          faceZone;
+    faceZone        AlavergaZone;
+    operation       sum;
+
+    fields
+    (
+        phi
+		alpha.water
+		U
+    );
+
+    weightField     alpha.water;
+}
+
+Outlel1caudal
+{
+    type            surfaceFieldValue;
+    libs            ("libfieldFunctionObjects.so");
+    writeControl   timeStep;
+    log             true;
+    // Output field values as well
+    writeFields     false;
+    select          patch;
+    patch           outlet1;
+    operation       sum;
+
+    fields
+    (
+        phi
+		alpha.water
+		U
+    );
+
+    weightField     alpha.water;
+}
+
+outlet1Flux
+{
+    $inletFlux;
+    patch           outlet1;
+}
+
+outlet2Flux
+{
+    $inletFlux;
+    patch           outlet2;
+}
+
+atmosphereFlux
+{
+    $inletFlux;
+    patch           atmosphere;
+}
+
+//Outlet_ADM1​
+
+    {​
+
+            type            patchAverage; // Tipo de monitorización, en este caso sobre un patch del dominio.​
+
+            patch           outlet;//Dónde monitorizar	​
+
+            patches         (outlet);//Dónde monitorizar	​
+
+            libs ("libfieldFunctionObjects.so");//Librería necesaria​
+
+            enabled         true;​
+
+            writeStartTime  no;​
+
+            outputControlMode   timeStep;​
+
+            outputInterval   1;​
+
+            valueOutput     true;​
+
+            log             true;​
+
+            fields          ​
+
+            (​
+
+              Saa​
+
+              Xsu​
+
+            );//Nombre de las variables a monitorizar​
+
+            operation       patchIntegrate;​
+
+        }​
+//
+    
+TOutlet
+{
+    patch           outlet2Flux;
+    type            patchAverage;
+    patches         (outlet2Flux);
+    functionObjectLibs ("libfieldFunctionObjects.so");
+    enabled         true;
+    outputControl   timeStep;
+    writeInterval   1;
+    valueOutput     true;
+    log             true;
+    fields          (U);
+    operation       patchIntegrate;
+}
+	
+
+
+// ************************************************************************* //

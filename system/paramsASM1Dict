@@ -1,0 +1,39 @@
+variables (
+	
+	/* Define kinetic parameters [g/m3s]*/
+	"kh=3.47222e-5;"
+	"Kx=0.03;"
+	"nh=0.4;"
+	"muH=6.9444e-5;"
+	"ng=0.8;"
+	"Ks=20;"
+	"bH=7.1759e-6;"
+	"KoH=0.2;"
+	"Kno=0.5;"
+	"KnhH=0.05;"
+	"muA=9.25926e-6;"
+	"bA=1.73611e-6;"
+	"qam=9.25926e-7;"
+	"KoA=0.4;"
+	"KnhA=1;"
+
+/* Define Stoich parameters: [g/m3s] */
+	"Yh=0.67;"
+	"fp=0.08;"
+	"Ya=0.24;"
+	"ixb=0.086;"
+	"ixp=0.06;"
+	"ino3n2=2.857;"
+	"icodno3= -4.571;"
+	"icodn2=-1.71429;"
+	"ichargesnhx=0.071;"
+	"ichargesnox=-0.07143;"
+	
+
+
+"VSMALL=1.0e-18;"
+		
+);
+
+/*Parameters ASM1
+Author: Rosario Arnau*/

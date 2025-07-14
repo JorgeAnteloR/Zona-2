@@ -1,0 +1,353 @@
+
+    {
+
+        Si
+        {
+            type  scalarTransport;
+            libs  ("libsolverFunctionObjects.so");
+            log   off;
+        
+            resetOnStartUp  false;
+            field           Si;
+            D               6.6e-09;//m2 s-1
+            schemesField    Si;
+	   
+   		}
+
+	Ss
+        {
+            type  scalarTransport;
+            libs  ("libsolverFunctionObjects.so");
+            log   off;
+        
+            resetOnStartUp  false;
+            field           Ss;
+            D               8e-10;//m2 s-1
+            schemesField    Ss;
+	    
+	    fvOptions
+            {
+		SsSource //Ss
+			{
+		    type scalarSwakExplicitSource;
+		    active true;
+		    selectionMode all;//Act in all domain
+		    scalarSwakExplicitSourceCoeffs {
+			#include "paramsASM1Dict"//read paramsASM1Dict
+		    selectionMode   all;
+	            expressions {
+	            Ss "(((-muH/Yh)*(Ss/(Ks+Ss))*((So/(KoH+So))*(Snh/(KnhH+Snh))+ng*(KoH/(KoH+So))*(Sno/(Kno+Sno))*(Snh/(KnhH+Snh)))+kh*((Xs/(Xbh+VSMALL))/(Kx+Xs/(Xbh+VSMALL)))*((So/(KoH+So))+nh*(KoH/(KoH+So))*(Sno/(Kno+Sno))))*Xbh)" [0 0 -1 0 0 0 0]; 
+			}
+		    }
+        	}
+			}
+
+        }
+	Xi
+        {
+            type  scalarTransport;
+            libs  ("libsolverFunctionObjects.so");
+            log   off;
+        
+            resetOnStartUp  false;
+            field           Xi;
+            D               8e-10;//m2 s-1
+            schemesField    Xi;
+	   
+        }
+	Xs
+        {
+            type  scalarTransport;
+            libs  ("libsolverFunctionObjects.so");
+            log   off;
+        
+            resetOnStartUp  false;
+            field           Xs;
+            D               8e-10;//m2 s-1
+            schemesField    Xs;
+	    
+	    fvOptions
+            {
+		XsSource //Xs
+			{
+		    type scalarSwakExplicitSource;
+		    active true;
+		    selectionMode all;//Act in all domain
+		    scalarSwakExplicitSourceCoeffs {
+			#include "paramsASM1Dict"//read paramsASM1Dict
+		    selectionMode   all;
+	            expressions {
+	            Xs "((1-fp)*((bH*Xbh)+(bA*Xba))-(kh*((Xs/(Xbh+VSMALL))/(Kx+Xs/(Xbh+VSMALL)))*((So/(KoH+So))+nh*(KoH/(KoH+So))*(Sno/(Kno+Sno)))*Xbh))" [0 0 -1 0 0 0 0]; 
+	            }
+		    }
+        	}
+			}
+
+        }
+	Xbh
+        {
+            type  scalarTransport;
+            libs  ("libsolverFunctionObjects.so");
+            log   off;
+        
+            resetOnStartUp  false;
+            field           Xbh;
+            D               1.06e-09;//m2 s-1
+            schemesField    Xbh;
+	    
+	    fvOptions
+            {
+		XbhSource //Xbh
+			{
+		    type scalarSwakExplicitSource;
+		    active true;
+		    selectionMode all;//Act in all domain
+		    scalarSwakExplicitSourceCoeffs {
+			#include "paramsASM1Dict"//read paramsASM1Dict
+		    selectionMode   all;
+	            expressions {
+	            Xbh "((muH*(Ss/(Ks+Ss))*((So/(KoH+So))*(Snh/(KnhH+Snh))+ng*(KoH/(KoH+So))*(Sno/(Kno+Sno))*(Snh/(KnhH+Snh)))-bH)*Xbh)" [0 0 -1 0 0 0 0]; 
+	            }
+		    }
+        	}
+			}
+
+        }
+	Xba
+        {
+            type  scalarTransport;
+            libs  ("libsolverFunctionObjects.so");
+            log   off;
+        
+            resetOnStartUp  false;
+            field           Xba;
+            D               8e-10;//m2 s-1
+            schemesField    Xba;
+	    
+	    fvOptions
+            {
+		XbaSource //Xba
+			{
+		    type scalarSwakExplicitSource;
+		    active true;
+		    selectionMode all;//Act in all domain
+		    scalarSwakExplicitSourceCoeffs {
+			#include "paramsASM1Dict"//read paramsASM1Dict
+		    selectionMode   all;
+	            expressions {
+	            Xba "((muA*(Snh/(KnhA+Snh))*(So/(KoA+So))*Xba)-(bA*Xba))" [0 0 -1 0 0 0 0]; 
+	            }
+		    }
+        	}
+			}
+
+        }
+	Xp
+        {
+            type  scalarTransport;
+            libs  ("libsolverFunctionObjects.so");
+            log   off;
+        
+            resetOnStartUp  false;
+            field           Xp;
+            D               1.089e-09;//m2 s-1
+            schemesField    Xp;
+	    
+	    fvOptions
+            {
+		XpSource //Xp
+			{
+		    type scalarSwakExplicitSource;
+		    active true;
+		    selectionMode all;//Act in all domain
+		    scalarSwakExplicitSourceCoeffs {
+			#include "paramsASM1Dict"//read paramsASM1Dict
+		    selectionMode   all;
+	            expressions {
+	            Xp "(fp*(bH*Xbh+bA*Xba))" [0 0 -1 0 0 0 0]; 
+	            }
+		    }
+        	}
+			}
+
+        }
+	So
+        {
+            type  scalarTransport;
+            libs  ("libsolverFunctionObjects.so");
+            log   off;
+        
+            resetOnStartUp  false;
+            field           So;
+            D               5.7555e-09;//m2 s-1
+            schemesField    So;
+	    
+	    fvOptions
+            {
+		SoSource //So
+			{
+		    type scalarSwakExplicitSource;
+		    active true;
+		    selectionMode all;//Act in all domain
+		    scalarSwakExplicitSourceCoeffs {
+			#include "paramsASM1Dict"//read paramsASM1Dict
+		    selectionMode   all;
+	            expressions {
+	            So "((-((1-Yh)/Yh)*muH*(Ss/(Ks+Ss))*(So/(KoH+So))*(Snh/(KnhH+Snh))*Xbh)-(((-icodno3-Ya)/Ya)*muA*(Snh/(KnhA+Snh))*(So/(KoA+So))*Xba))" [0 0 -1 0 0 0 0]; 
+	            }
+		    }
+        	}
+			}
+
+        }
+	Sno
+        {
+            type  scalarTransport;
+            libs  ("libsolverFunctionObjects.so");
+            log   off;
+        
+            resetOnStartUp  false;
+            field           Sno;
+            D               1.90571e-09;//m2 s-1
+            schemesField    Sno;
+	    
+	    fvOptions
+            {
+		SnoSource //Sno
+			{
+		    type scalarSwakExplicitSource;
+		    active true;
+		    selectionMode all;//Act in all domain
+		    scalarSwakExplicitSourceCoeffs {
+			#include "paramsASM1Dict"//read paramsASM1Dict
+		    selectionMode   all;
+	            expressions {
+	            Sno "((-((1-Yh)/(ino3n2*Yh))*muH*(Ss/(Ks+Ss))*(KoH/(KoH+So))*(Sno/(Kno+Sno))*(Snh/(KnhH+Snh))*ng*Xbh)+((1/Ya)*muA*(Snh/(KnhA+Snh))*(So/(KoA+So))*Xba))" [0 0 -1 0 0 0 0]; 
+	            }
+		    }
+        	}
+			}
+
+        }
+	Snh
+        {
+            type  scalarTransport;
+            libs  ("libsolverFunctionObjects.so");
+            log   off;
+        
+            resetOnStartUp  false;
+            field           Snh;
+            D               2.45568e-09;//m2 s-1
+            schemesField    Snh;
+	    
+	    fvOptions
+            {
+		SnhSource //Snh
+			{
+		    type scalarSwakExplicitSource;
+		    active true;
+		    selectionMode all;//Act in all domain
+		    scalarSwakExplicitSourceCoeffs {
+			#include "paramsASM1Dict"//read paramsASM1Dict
+		    selectionMode   all;
+	            expressions {
+	            Snh "(((-ixb*muH*(Ss/(Ks+Ss))*((So/(KoH+So))*(Snh/(KnhH+Snh))+(KoH/(KoH+So))*(Sno/(Kno+Sno))*(Snh/(KnhH+Snh))*ng)+qam*Snd)*Xbh)+((-ixb-1/Ya)*(muA*(Snh/(KnhA+Snh))*(So/(KoA+So))*Xba)))"[0 0 -1 0 0 0 0]; 
+	            }
+		    }
+        	}
+			}
+
+        }
+	Snd
+        {
+            type  scalarTransport;
+            libs  ("libsolverFunctionObjects.so");
+            log   off;
+        
+            resetOnStartUp  false;
+            field           Snd;
+            D               1.88e-09;//m2 s-1
+            schemesField    Snd;
+	    
+	    fvOptions
+            {
+		SndSource //Snd
+			{
+		    type scalarSwakExplicitSource;
+		    active true;
+		    selectionMode all;//Act in all domain
+		    scalarSwakExplicitSourceCoeffs {
+			#include "paramsASM1Dict"//read paramsASM1Dict
+		    selectionMode   all;
+	            expressions {
+	            Snd "(-(qam*Snd*Xbh)+(kh*((Xnd/(Xbh+VSMALL))/(Kx+Xs/(Xbh+VSMALL)))*((So/(KoH+So))+nh*(KoH/(KoH+So))*(Sno/(Kno+Sno)))*Xbh))" [0 0 -1 0 0 0 0]; 
+	            }
+		    }
+        	}
+			}
+
+        }
+	Xnd
+        {
+            type  scalarTransport;
+            libs  ("libsolverFunctionObjects.so");
+            log   off;
+        
+            resetOnStartUp  false;
+            field           Xnd;
+            D               8e-10;//m2 s-1
+            schemesField    Xnd;
+	    
+	    fvOptions
+            {
+		XndSource //Xnd
+			{
+		    type scalarSwakExplicitSource;
+		    active true;
+		    selectionMode all;//Act in all domain
+		    scalarSwakExplicitSourceCoeffs {
+			#include "paramsASM1Dict"//read paramsASM1Dict
+		    selectionMode   all;
+	            expressions {
+	            Xnd "(((ixb-fp*ixp)*(bH*Xbh+bA*Xba))-(kh*((Xnd/(Xbh+VSMALL))/(Kx+Xs/(Xbh+VSMALL)))*((So/(KoH+So))+nh*(KoH/(KoH+So))*(Sno/(Kno+Sno)))*Xbh))" [0 0 -1 0 0 0 0]; 
+	            }
+		    }
+        	}
+			}
+
+        }
+	Salk
+        {
+            type  scalarTransport;
+            libs  ("libsolverFunctionObjects.so");
+            log   off;
+        
+            resetOnStartUp  false;
+            field           Salk;
+            D               5e-11;//m2 s-1
+            schemesField    Salk;
+	    
+	    fvOptions
+            {
+		SalkSource //Salk
+			{
+		    type scalarSwakExplicitSource;
+		    active true;
+		    selectionMode all;//Act in all domain
+		    scalarSwakExplicitSourceCoeffs {
+			#include "paramsASM1Dict"//read paramsASM1Dict
+		    selectionMode   all;
+	            expressions {
+	            Salk "((-ixb*ichargesnhx)*((muH*(Ss/(Ks+Ss))*(So/(KoH+So)))*(Snh/(KnhH+Snh))*Xbh)+(-(1-Yh)/(ino3n2*Yh)*ichargesnox-ixb*ichargesnhx)*(muH*(Ss/(Ks+Ss))*(KoH/(KoH+So))*(Sno/(Kno+Sno))*(Snh/(KnhH+Snh))*ng*Xbh)+(-(ixb+1/Ya)*ichargesnhx+(1/Ya)*ichargesnox)*(muA*(Snh/(KnhA+Snh))*(So/(KoA+So))*Xba)+ichargesnhx*(qam*Snd*Xbh))" [0 0 -1 0 0 0 0]; 
+	            }
+		    }
+        	}
+			}
+
+        }
+    
+}		
+
+    
+/*ASM1 Source Terms
+Author: Rosario Arnau*/
